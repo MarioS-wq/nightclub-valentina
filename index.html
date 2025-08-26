@@ -121,7 +121,45 @@
 
 
         /* =================================================================== */
-        /*  3. HEADER & HERO SECTION                                         */
+        /*  3. TOP NAVIGATION BAR (NEW)                                      */
+        /* =================================================================== */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 12px 40px;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1001;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        .top-bar-link {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color var(--transition-fast);
+        }
+        .top-bar-link:hover {
+            color: var(--gold);
+        }
+        .top-bar-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+
+        /* =================================================================== */
+        /*  4. HEADER & HERO SECTION                                         */
         /* =================================================================== */
         .hero {
             position: relative;
@@ -135,17 +173,18 @@
             background: radial-gradient(ellipse at center, rgba(10, 0, 0, 0.2) 0%, rgba(5, 0, 0, 0.8) 70%, #000 100%);
         }
         
-        /* --- Logo Container (Top-Left) --- */
+        /* --- Logo Container (Top-Center) --- */
         .logo-container {
-            position: fixed; /* Fixed to stay on screen */
-            top: 30px;
-            left: 30px;
-            z-index: 1000; /* Always on top */
+            position: absolute;
+            top: 80px; /* More space from the new top bar */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
             animation: fadeIn 2s ease-out forwards;
         }
 
         .logo-asset {
-            width: clamp(150px, 15vw, 200px);
+            width: clamp(180px, 25vw, 240px);
             height: auto;
             transition: transform var(--transition-fast);
         }
@@ -172,7 +211,7 @@
         .hero-text {
             position: relative;
             z-index: 3;
-            padding-bottom: 30vh; 
+            padding-bottom: 35vh; /* Increased padding for more space */
             text-shadow: 0px 5px 30px rgba(0, 0, 0, 0.95);
         }
 
@@ -226,7 +265,7 @@
 
 
         /* =================================================================== */
-        /*  4. CONTENT SECTIONS & CONTAINERS                                 */
+        /*  5. CONTENT SECTIONS & CONTAINERS                                 */
         /* =================================================================== */
         .content-section {
             padding: 120px 40px;
@@ -294,7 +333,7 @@
         
         
         /* =================================================================== */
-        /*  5. INFO SECTION STYLING                                          */
+        /*  6. INFO SECTION STYLING                                          */
         /* =================================================================== */
         .info-container {
             max-width: 850px;
@@ -342,7 +381,7 @@
         
 
         /* =================================================================== */
-        /*  6. 3-COLUMN GRID SECTION                                         */
+        /*  7. 3-COLUMN GRID SECTION                                         */
         /* =================================================================== */
         .grid-container {
             display: grid;
@@ -429,39 +468,6 @@
             font-size: 1.1rem;
         }
         
-        
-        /* =================================================================== */
-        /*  7. EVENTS SECTION                                                */
-        /* =================================================================== */
-        .event-card {
-            background-color: rgba(255, 255, 255, 0.02);
-            border-left: 4px solid var(--gold);
-            padding: 30px;
-            margin-bottom: 30px;
-            text-align: left;
-            transition: background-color var(--transition-fast), transform var(--transition-fast);
-        }
-        .event-card:hover {
-            background-color: rgba(255, 255, 255, 0.04);
-            transform: translateX(10px);
-        }
-        .event-card .event-date {
-            font-size: 1rem;
-            font-weight: 300;
-            color: var(--gold-transparent-light);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        .event-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-        .event-card p {
-            font-size: 1.1rem;
-            color: var(--text-medium);
-        }
-
 
         /* =================================================================== */
         /*  8. GALLERY & LIGHTBOX SECTION                                    */
@@ -685,8 +691,8 @@
 
         @media (max-width: 768px) {
             html { font-size: 14px; }
-            .logo-container { top: 20px; left: 20px; }
-            .logo-asset { width: 140px; }
+            .top-bar { padding: 10px 20px; }
+            .top-bar-link span { display: none; } /* Hide text on mobile, only show icon */
             .content-section { padding: 80px 20px; }
             .grid-container { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
@@ -698,6 +704,8 @@
             .hero-text p { letter-spacing: 3px; }
             .info-container { padding: 30px 20px; }
             .grid-item { padding: 30px 20px; }
+            .logo-container { top: 70px; }
+            .logo-asset { width: 150px; }
         }
 
     </style>
@@ -705,15 +713,27 @@
 <body>
 
     <!-- =================================================================== -->
-    <!--  BACKGROUND & HERO SECTION                                          -->
+    <!--  UI & BACKGROUND ELEMENTS                                           -->
     <!-- =================================================================== -->
     <canvas id="fireworks-canvas"></canvas>
 
+    <div class="top-bar">
+        <a href="tel:+4369019533945" class="top-bar-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.02.74-.25 1.02l-2.2 2.2z"/></svg>
+            <span>+43 690 19533945</span>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=St.+Pankraz+93,+4572+St.+Pankraz" class="top-bar-link" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>St. Pankraz 93, 4572</span>
+        </a>
+    </div>
+
+    <!-- =================================================================== -->
+    <!--  HERO SECTION                                                       -->
+    <!-- =================================================================== -->
     <header class="hero">
         <div class="logo-container">
-            <a href="#" aria-label="Zur Startseite">
-                <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756135781/ChatGPT_Image_25._Aug._2025_17_29_07_lojg0t.png" alt="Nightclub Valentina Logo" class="logo-asset">
-            </a>
+            <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756135781/ChatGPT_Image_25._Aug._2025_17_29_07_lojg0t.png" alt="Nightclub Valentina Logo" class="logo-asset">
         </div>
         <div class="hero-text">
             <h1>Nightclub Valentina</h1>
@@ -771,29 +791,9 @@
                 </div>
             </div>
         </section>
-
-        <!-- Special Events Section -->
-        <section class="content-section light">
-            <div class="section-container">
-                <h2 class="section-title animate-on-scroll">Special Events</h2>
-                <p class="section-subtitle animate-on-scroll">Erleben Sie Nächte, die Sie nie vergessen werden.</p>
-                <div class="event-list animate-on-scroll">
-                    <div class="event-card">
-                        <p class="event-date">Jeden Freitag - Golden Night</p>
-                        <h3>Champagner & Kaviar</h3>
-                        <p>Beginnen Sie Ihr Wochenende mit purer Dekadenz. Genießen Sie erlesenen Champagner und exklusive Köstlichkeiten in glamouröser Atmosphäre.</p>
-                    </div>
-                    <div class="event-card">
-                        <p class="event-date">Letzter Samstag im Monat - Masquerade Ball</p>
-                        <h3>Die Nacht der Geheimnisse</h3>
-                        <p>Lassen Sie Ihrer Fantasie freien Lauf bei unserem venezianischen Maskenball. Eine Nacht voller Mysterien, Eleganz und verführerischer Begegnungen.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
         
         <!-- Gallery Section -->
-        <section class="content-section dark">
+        <section class="content-section light">
             <div class="section-container">
                 <h2 class="section-title animate-on-scroll">Impressionen</h2>
                 <p class="section-subtitle animate-on-scroll">Ein flüchtiger Blick in unsere Welt der Verführung.</p>

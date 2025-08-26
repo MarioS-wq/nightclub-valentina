@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nightclub Valentina</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    <style>
+        /* --- Grundlegende Styles & Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0c0c0c; /* Dunklerer Hintergrund für mehr Eleganz */
+            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden; /* Verhindert horizontales Scrollen */
+        }
+
+        /* --- Canvas für Feuerwerk-Animation --- */
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* --- Hero Section Container --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Dunkleres Overlay für bessere Lesbarkeit */
+            z-index: 3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 4;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #f3d7a8; /* Gold-Ton */
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- 3er Grid Sektion --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            background-color: #111;
+            text-align: center;
+        }
+
+        .info-box {
+            background-color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid #f3d7a8;
+        }
+        
+        .info-box h2 {
+            font-family: 'Playfair Display', serif;
+            color: #f3d7a8;
+            margin-bottom: 1rem;
+        }
+        
+        .info-box p {
+            line-height: 1.6;
+        }
+        
+        .whatsapp-button, .phone-button {
+            display: inline-block;
+            background-color: #f3d7a8;
+            color: #111;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .whatsapp-button:hover, .phone-button:hover {
+            background-color: #e1c592;
+        }
+
+        /* --- Galerie Sektion --- */
+        .gallery {
+            padding: 4rem 2rem;
+            background-color: #0c0c0c;
+        }
+        
+        .gallery h2 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            color: #f3d7a8;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            width: 100%;
+            height: 250px;
+            background-color: #333;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 1.2rem;
+        }
+        
+        /* --- Footer --- */
+        .footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="fireworks-canvas"></canvas>
+    
+    <div class="page-wrapper">
+        <header class="hero">
+            <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756232073/Design_ohne_Titel_29_iqttcg.png" alt="Frau" class="hero-image">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Willkommen im Nightclub Valentina</h1>
+                <p>Erleben Sie unvergessliche Nächte in exklusiver Atmosphäre.</p>
+            </div>
+        </header>
+
+        <main>
+            <section class="info-grid">
+                <div class="info-box">
+                    <h2>Girls Gesucht</h2>
+                    <p>Wir sind immer auf der Suche nach neuen Mädels, die unser Team bereichern.</p>
+                    <a href="https://wa.link/md8dbu" class="whatsapp-button" target="_blank"><i class="fab fa-whatsapp"></i> Jetzt bewerben</a>
+                </div>
+                <div class="info-box">
+                    <h2>Gäste-Info</h2>
+                    <p>Wir haben für Sie geöffnet. Für unseren Escort-Service nutzen Sie bitte diese Nummer:</p>
+                    <a href="tel:+4369019533945" class="phone-button"><i class="fas fa-phone"></i> +43 690 19533945</a>
+                </div>
+                <div class="info-box">
+                    <h2>Anfahrt und Parken</h2>
+                    <p>Hier erfahren Sie alles rund um die Anfahrt zu uns. Unsere Adresse lautet:</p>
+                    <p><strong>St. Pankraz 93, 4572 St. Pankraz</strong></p>
+                </div>
+            </section>
+            
+            <section class="gallery">
+                <h2>Galerie</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">Platzhalter</div>
+                    <div class="gallery-item">Platzhalter</div>
+                    <div class="gallery-item">Platzhalter</div>
+                    <div class="gallery-item">Platzhalter</div>
+                    <div class="gallery-item">Platzhalter</div>
+                    <div class="gallery-item">Platzhalter</div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2024 Nightclub Valentina. Alle Rechte vorbehalten.</p>
+            <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('fireworks-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let rockets = [], particles = [];
+
+        class Rocket {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height;
+                this.vx = Math.random() * 2 - 1;
+                this.vy = Math.random() * -3 - 2;
+                this.size = 2;
+                // Feuerwerke nur in Gelb- und Rottönen
+                this.hue = Math.random() < 0.5 ? Math.random() * 30 + 15 : Math.random() * 20; // Gelb-Orange-Rot
+                this.lifespan = Math.random() * (canvas.height / 4) + (canvas.height / 4);
+            }
+            update() { this.x += this.vx; this.y += this.vy; this.lifespan--; }
+            draw() { ctx.fillStyle = `hsl(${this.hue}, 100%, 60%)`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        }
+
+        class Particle {
+            constructor(x, y, hue) {
+                this.x = x; this.y = y; this.size = Math.random() * 2 + 1;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 4 + 1;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.hue = hue; this.opacity = 1; this.lifespan = 80;
+            }
+            update() { this.x += this.vx; this.y += this.vy; this.opacity -= 0.02; this.lifespan--;}
+            explode() {
+                const pCount = 50; // Weniger Partikel für dezentere Explosion
+                for (let i = 0; i < pCount; i++) particles.push(new Particle(this.x, this.y, this.hue));
+            }
+            draw() { ctx.fillStyle = `hsla(${this.hue}, 100%, 70%, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        }
+        
+        function animateFireworks() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Etwas langsameres Verblassen
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            for (let i = rockets.length - 1; i >= 0; i--) { rockets[i].update(); rockets[i].draw(); if (rockets[i].lifespan <= 0) { rockets[i].explode(); rockets.splice(i, 1); } }
+            for (let i = particles.length - 1; i >= 0; i--) { particles[i].update(); particles[i].draw(); if (particles[i].lifespan <= 0 || particles[i].opacity <= 0) particles.splice(i, 1); }
+            requestAnimationFrame(animateFireworks);
+        }
+        
+        // Selteneres Feuerwerk
+        setInterval(() => { rockets.push(new Rocket()); }, 2500);
+        
+        animateFireworks();
+
+    </script>
+</body>
+</html>

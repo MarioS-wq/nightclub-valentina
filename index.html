@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nightclub Valentina</title>
     
+    <!-- Import für elegante Schriftarten -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
 
     <style>
         /* --- Grundlegende Styles & Reset --- */
+        :root {
+            --gold: #FFD700;
+            --gold-transparent-light: rgba(255, 215, 0, 0.9);
+            --gold-transparent-medium: rgba(255, 215, 0, 0.7);
+            --gold-transparent-dark: rgba(255, 215, 0, 0.3);
+            --dark-bg: #000;
+            --light-bg: #111;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -24,10 +32,15 @@
         }
 
         body {
-            background-color: #0c0c0c; /* Dunklerer Hintergrund für mehr Eleganz */
+            background-color: var(--dark-bg);
             color: #ffffff;
             font-family: 'Roboto', sans-serif;
             overflow-x: hidden; /* Verhindert horizontales Scrollen */
+        }
+
+        h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
         }
 
         /* --- Canvas für Feuerwerk-Animation --- */
@@ -38,254 +51,458 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+            pointer-events: none;
         }
 
         /* --- Hero Section Container --- */
         .hero {
             position: relative;
             height: 100vh;
+            width: 100vw;
             display: flex;
-            align-items: center;
             justify-content: center;
-            overflow: hidden;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 70%, #000000 100%);
+        }
+        
+        /* --- Logo-Container --- */
+        .logo-container {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            animation: fadeIn 2s ease-out forwards;
+        }
+
+        .logo-asset {
+            width: clamp(180px, 25vw, 240px);
+            height: auto;
+        }
+
+        /* --- Bild der Frau --- */
+        .woman-asset {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            max-height: 100vh;
+            max-width: 100%;
+            object-fit: contain;
+            object-position: bottom;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* --- Text-Container --- */
+        .hero-text {
+            position: relative;
+            z-index: 3;
+            padding-bottom: 30vh; 
+            text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(145deg, var(--gold), #F0E6D2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            animation: slideUp 1.5s 0.5s ease-out forwards;
+        }
+
+        .hero-text p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.85);
+            opacity: 0;
+            animation: fadeIn 1.5s 1s ease-out forwards;
+        }
+
+        /* --- Scroll-Indikator als Link --- */
+        .scroll-down-link {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            width: 24px;
+            height: 40px;
+            border: 2px solid var(--gold-transparent-medium);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 6px;
+            animation: fadeIn 2s 1.5s ease-out forwards;
+            opacity: 0;
+        }
+        .scroll-down-link::before {
+            content: '';
+            width: 4px;
+            height: 8px;
+            background-color: var(--gold-transparent-medium);
+            border-radius: 2px;
+            animation: scroll-anim 2s infinite;
+        }
+
+        /* --- Genereller Section Style --- */
+        .content-section {
+            padding: 100px 20px;
+            background: linear-gradient(to bottom, var(--light-bg), var(--dark-bg));
+            position: relative;
+            z-index: 5;
+        }
+        .content-section:nth-of-type(even) {
+            background: var(--dark-bg);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
         }
 
-        .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 2;
-        }
-        
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Dunkleres Overlay für bessere Lesbarkeit */
-            z-index: 3;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 4;
-            color: #fff;
-            padding: 20px;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: #f3d7a8; /* Gold-Ton */
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
+        .section-divider {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
             margin: 0 auto;
         }
 
-        /* --- 3er Grid Sektion --- */
-        .info-grid {
+        /* --- Premium Info-Sektion Styling --- */
+        .info-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 50px;
+            border: 1px solid var(--gold-transparent-dark);
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .info-container h2 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            color: var(--gold);
+            margin: 30px 0;
+            letter-spacing: 1px;
+        }
+        .info-container .slogan {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-style: italic;
+            color: var(--gold);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .info-container .details-text {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-weight: 300;
+            color: var(--gold-transparent-light);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 2;
+        }
+        .info-container .tagline {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-style: italic;
+            text-transform: none;
+            color: var(--gold-transparent-medium);
+            margin-top: 1rem;
+        }
+        
+        /* --- NEU: 3er Grid Sektion --- */
+        .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 4rem 2rem;
-            background-color: #111;
-            text-align: center;
+            gap: 40px;
+            margin-top: 60px;
         }
-
-        .info-box {
-            background-color: #1a1a1a;
-            padding: 2rem;
-            border-radius: 10px;
-            border: 1px solid #f3d7a8;
-        }
-        
-        .info-box h2 {
-            font-family: 'Playfair Display', serif;
-            color: #f3d7a8;
-            margin-bottom: 1rem;
-        }
-        
-        .info-box p {
-            line-height: 1.6;
-        }
-        
-        .whatsapp-button, .phone-button {
-            display: inline-block;
-            background-color: #f3d7a8;
-            color: #111;
-            padding: 10px 20px;
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--gold-transparent-dark);
             border-radius: 5px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+        .grid-item h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .grid-item p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            color: var(--gold);
             text-decoration: none;
+            text-transform: uppercase;
             font-weight: bold;
-            margin-top: 1rem;
-            transition: background-color 0.3s;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        
-        .whatsapp-button:hover, .phone-button:hover {
-            background-color: #e1c592;
+        .btn:hover {
+            background-color: var(--gold);
+            color: var(--dark-bg);
         }
-
-        /* --- Galerie Sektion --- */
-        .gallery {
-            padding: 4rem 2rem;
-            background-color: #0c0c0c;
-        }
-        
-        .gallery h2 {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            color: #f3d7a8;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
+        .btn-phone {
+            font-size: 1.1rem;
         }
 
+        /* --- NEU: Galerie Sektion --- */
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            margin-bottom: 50px;
+        }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
         }
-        
         .gallery-item {
             width: 100%;
-            height: 250px;
-            background-color: #333;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            font-size: 1.2rem;
+            padding-top: 100%; /* 1:1 Aspect Ratio */
+            background-color: #222;
+            border: 2px solid var(--gold-transparent-dark);
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
         }
-        
-        /* --- Footer --- */
-        .footer {
-            background-color: #111;
-            color: #aaa;
-            padding: 2rem;
-            text-align: center;
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: var(--gold);
         }
-        
-        .footer p {
-            margin-bottom: 1rem;
+        .gallery-item::before {
+            content: 'Impression';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #555;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
         }
 
+        /* --- NEU: Footer --- */
+        .site-footer {
+            background-color: #050505;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+            border-top: 1px solid #222;
+        }
+        .site-footer p {
+            color: #888;
+            margin-bottom: 15px;
+        }
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        /* --- Keyframe & On-Scroll Animationen --- */
+        .animate-on-scroll { 
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animate-on-scroll.visible .grid-item:nth-child(1) { transition-delay: 0.2s; }
+        .animate-on-scroll.visible .grid-item:nth-child(2) { transition-delay: 0.4s; }
+        .animate-on-scroll.visible .grid-item:nth-child(3) { transition-delay: 0.6s; }
+        
+        .info-container.animate-on-scroll.visible > * { opacity: 1; transform: translateY(0); }
+        .info-container.animate-on-scroll > * { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .info-container.animate-on-scroll.visible .section-divider:first-of-type { transition-delay: 0.2s; }
+        .info-container.animate-on-scroll.visible h2 { transition-delay: 0.4s; }
+        .info-container.animate-on-scroll.visible .slogan { transition-delay: 0.6s; }
+        .info-container.animate-on-scroll.visible .details-text { transition-delay: 0.8s; }
+        .info-container.animate-on-scroll.visible .section-divider:last-of-type { transition-delay: 1s; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scroll-anim {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(10px); opacity: 0.5; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Anpassungen */
+        @media (max-width: 768px) {
+            .info-container { padding: 30px 20px; }
+            .grid-container { gap: 20px; }
+        }
     </style>
 </head>
 <body>
 
     <canvas id="fireworks-canvas"></canvas>
-    
-    <div class="page-wrapper">
-        <header class="hero">
-            <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756232073/Design_ohne_Titel_29_iqttcg.png" alt="Frau" class="hero-image">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1>Willkommen im Nightclub Valentina</h1>
-                <p>Erleben Sie unvergessliche Nächte in exklusiver Atmosphäre.</p>
-            </div>
-        </header>
 
-        <main>
-            <section class="info-grid">
-                <div class="info-box">
-                    <h2>Girls Gesucht</h2>
-                    <p>Wir sind immer auf der Suche nach neuen Mädels, die unser Team bereichern.</p>
-                    <a href="https://wa.link/md8dbu" class="whatsapp-button" target="_blank"><i class="fab fa-whatsapp"></i> Jetzt bewerben</a>
+    <header class="hero">
+        <div class="logo-container">
+            <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756135781/ChatGPT_Image_25._Aug._2025_17_29_07_lojg0t.png" alt="Nightclub Valentina Logo" class="logo-asset">
+        </div>
+        <div class="hero-text">
+            <h1>Nightclub Valentina</h1>
+            <p>Welcome To Nightclub Entertainment</p>
+        </div>
+        <!-- GEÄNDERTES BILD -->
+        <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756232073/Design_ohne_Titel_29_iqttcg.png" alt="Nightclub Valentina" class="woman-asset">
+        <a href="#info" class="scroll-down-link" aria-label="Scroll down"></a>
+    </header>
+
+    <main>
+        <section class="content-section" id="info">
+            <div class="info-container animate-on-scroll">
+                <div class="section-divider"></div>
+                <h2>Unsere Nightclub Location Nr. 3</h2>
+                <p class="slogan">"In unseren Gläsern ist mehr für Sie drinnen!"</p>
+                <div class="details-text">
+                    <p>Around the clock - Show & Party Girls</p>
+                    <p>and special After Midnight Bar</p>
+                    <p class="tagline">(not only for strangers in the night!)</p>
                 </div>
-                <div class="info-box">
-                    <h2>Gäste-Info</h2>
-                    <p>Wir haben für Sie geöffnet. Für unseren Escort-Service nutzen Sie bitte diese Nummer:</p>
-                    <a href="tel:+4369019533945" class="phone-button"><i class="fas fa-phone"></i> +43 690 19533945</a>
+                <div class="section-divider"></div>
+            </div>
+        </section>
+
+        <!-- NEUE 3ER GRID SEKTION -->
+        <section class="content-section">
+            <div class="section-container">
+                <div class="grid-container animate-on-scroll">
+                    <div class="grid-item">
+                        <h3>Girls Gesucht</h3>
+                        <p>Wir sind immer auf der Suche nach neuen, aufgeschlossenen Mädels, die unser Team bereichern wollen.</p>
+                        <a href="https://wa.link/md8dbu" class="btn" target="_blank" rel="noopener noreferrer">Bewerbung via WhatsApp</a>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Gäste-Info</h3>
+                        <p>Wir haben für Sie geöffnet. Für unseren diskreten Escort-Service kontaktieren Sie uns bitte unter dieser Nummer.</p>
+                        <a href="tel:+4369019533945" class="btn btn-phone">+43 690 19533945</a>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Anfahrt & Parken</h3>
+                        <p>Hier erfahren Sie alles rund um die Anfahrt. Ausreichend diskrete Parkmöglichkeiten sind vorhanden.</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=St.+Pankraz+93,+4572+St.+Pankraz" class="btn" target="_blank" rel="noopener noreferrer">St. Pankraz 93, 4572</a>
+                    </div>
                 </div>
-                <div class="info-box">
-                    <h2>Anfahrt und Parken</h2>
-                    <p>Hier erfahren Sie alles rund um die Anfahrt zu uns. Unsere Adresse lautet:</p>
-                    <p><strong>St. Pankraz 93, 4572 St. Pankraz</strong></p>
+            </div>
+        </section>
+
+        <!-- NEUE GALERIE SEKTION -->
+        <section class="content-section">
+            <div class="section-container">
+                <h2 class="section-title animate-on-scroll">Impressionen</h2>
+                <div class="gallery-grid animate-on-scroll">
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
                 </div>
-            </section>
-            
-            <section class="gallery">
-                <h2>Galerie</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item">Platzhalter</div>
-                    <div class="gallery-item">Platzhalter</div>
-                    <div class="gallery-item">Platzhalter</div>
-                    <div class="gallery-item">Platzhalter</div>
-                    <div class="gallery-item">Platzhalter</div>
-                    <div class="gallery-item">Platzhalter</div>
-                </div>
-            </section>
-        </main>
-        
-        <footer class="footer">
-            <p>&copy; 2024 Nightclub Valentina. Alle Rechte vorbehalten.</p>
-            <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
-        </footer>
-    </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- NEUER FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Nightclub Valentina. Alle Rechte vorbehalten.</p>
+            <div class="footer-links">
+                <a href="#">Impressum</a>
+                <a href="#">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
 
     <script>
+        // --- FEUERWERK ANIMATION (ANGEPASST) ---
         const canvas = document.getElementById('fireworks-canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        let rockets = [];
+        let particles = [];
+        const GRAVITY = 0.04;
+        const FRICTION = 0.99;
 
-        let rockets = [], particles = [];
-
-        class Rocket {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = canvas.height;
-                this.vx = Math.random() * 2 - 1;
-                this.vy = Math.random() * -3 - 2;
-                this.size = 2;
-                // Feuerwerke nur in Gelb- und Rottönen
-                this.hue = Math.random() < 0.5 ? Math.random() * 30 + 15 : Math.random() * 20; // Gelb-Orange-Rot
-                this.lifespan = Math.random() * (canvas.height / 4) + (canvas.height / 4);
-            }
-            update() { this.x += this.vx; this.y += this.vy; this.lifespan--; }
-            draw() { ctx.fillStyle = `hsl(${this.hue}, 100%, 60%)`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
         class Particle {
-            constructor(x, y, hue) {
-                this.x = x; this.y = y; this.size = Math.random() * 2 + 1;
-                const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 4 + 1;
-                this.vx = Math.cos(angle) * speed;
-                this.vy = Math.sin(angle) * speed;
-                this.hue = hue; this.opacity = 1; this.lifespan = 80;
-            }
-            update() { this.x += this.vx; this.y += this.vy; this.opacity -= 0.02; this.lifespan--;}
-            explode() {
-                const pCount = 50; // Weniger Partikel für dezentere Explosion
-                for (let i = 0; i < pCount; i++) particles.push(new Particle(this.x, this.y, this.hue));
-            }
-            draw() { ctx.fillStyle = `hsla(${this.hue}, 100%, 70%, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+            constructor(x, y, hue) { this.x = x; this.y = y; this.hue = hue; this.size = Math.random() * 1.5 + 1; this.lifespan = 100; this.opacity = 0.7; const angle = Math.random() * Math.PI * 2; const speed = Math.random() * 5 + 1; this.vx = Math.cos(angle) * speed; this.vy = Math.sin(angle) * speed; }
+            update() { this.vx *= FRICTION; this.vy *= FRICTION; this.vy += GRAVITY; this.x += this.vx; this.y += this.vy; this.lifespan--; if (this.lifespan < 50) this.opacity = (this.lifespan / 50) * 0.7; }
+            draw() { ctx.globalAlpha = this.opacity; ctx.fillStyle = `hsl(${this.hue}, 100%, 70%)`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1; }
+        }
+
+        class Rocket {
+            constructor() { this.x = Math.random() * canvas.width; this.y = canvas.height; this.size = 2; this.hue = Math.random() * 60; /* Nur Gelb/Rot Töne */ this.targetY = Math.random() * (canvas.height / 2); this.vy = -(Math.random() * 3 + 4); }
+            update() { this.y += this.vy; if (this.y < this.targetY) { this.explode(); this.lifespan = 0; } }
+            explode() { const pCount = 60; /* Weniger Partikel */ for(let i = 0; i < pCount; i++) particles.push(new Particle(this.x, this.y, this.hue)); }
+            draw() { ctx.fillStyle = `hsl(${this.hue}, 100%, 70%)`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
         }
         
         function animateFireworks() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Etwas langsameres Verblassen
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            for (let i = rockets.length - 1; i >= 0; i--) { rockets[i].update(); rockets[i].draw(); if (rockets[i].lifespan <= 0) { rockets[i].explode(); rockets.splice(i, 1); } }
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.18)'; /* Etwas schnelleres Verblassen */ ctx.fillRect(0, 0, canvas.width, canvas.height);
+            for (let i = rockets.length - 1; i >= 0; i--) { rockets[i].update(); rockets[i].draw(); if (rockets[i].lifespan === 0) rockets.splice(i, 1); }
             for (let i = particles.length - 1; i >= 0; i--) { particles[i].update(); particles[i].draw(); if (particles[i].lifespan <= 0 || particles[i].opacity <= 0) particles.splice(i, 1); }
             requestAnimationFrame(animateFireworks);
         }
-        
-        // Selteneres Feuerwerk
-        setInterval(() => { rockets.push(new Rocket()); }, 2500);
-        
+        setInterval(() => { rockets.push(new Rocket()); }, 2500); /* Seltener */
         animateFireworks();
 
+        // --- ON-SCROLL ANIMATION FÜR ALLE SEKTIONEN ---
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        const observerOptions = { root: null, threshold: 0.15, };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        animatedElements.forEach(el => observer.observe(el));
     </script>
+
 </body>
 </html>

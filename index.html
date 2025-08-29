@@ -664,7 +664,7 @@
     <canvas id="fireworks-canvas"></canvas>
 
     <!-- =================================================================== -->
-    <!--  NEUE HERO SECTION / KEYVISUAL                                      -->
+    <!--  HERO SECTION / KEYVISUAL                                           -->
     <!-- =================================================================== -->
     <header class="keyvisual-hero">
         
@@ -680,7 +680,7 @@
         <!-- BLOCK 2: BILD (GIRL) -->
         <div class="hero-image-container">
             <!-- NEUES BILD EINGEFÜGT -->
-            <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756469510/Design_ohne_Titel_37_drrnrq.png" alt="Eine elegante Frau in einem Nachtclub" class="woman-asset">
+            <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756470226/Design_ohne_Titel_38_b5w6lv.png" alt="Eine elegante Frau in einem Nachtclub" class="woman-asset">
             <a href="#info" class="scroll-down-link" aria-label="Scroll down"></a>
         </div>
 
@@ -811,12 +811,12 @@
     
 
     <!-- =================================================================== -->
-    <!--  JAVASCRIPT (UNVERÄNDERT)                                           -->
+    <!--  JAVASCRIPT                                                         -->
     <!-- =================================================================== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
-            // --- 1. FIREWORK ANIMATION (DEZENT & ELEGANT) ---
+            // --- 1. FIREWORK ANIMATION (INTENSIFIED) ---
             const canvas = document.getElementById('fireworks-canvas');
             const ctx = canvas.getContext('2d');
             let rockets = [];
@@ -878,7 +878,8 @@
                     if (this.y < this.targetY) { this.explode(); this.lifespan = 0; } 
                 }
                 explode() { 
-                    const pCount = Math.floor(Math.random() * 40) + 40; // Weniger Partikel
+                    // MEHR PARTIKEL
+                    const pCount = Math.floor(Math.random() * 60) + 60; 
                     for(let i = 0; i < pCount; i++) particles.push(new Particle(this.x, this.y, this.hue)); 
                 }
                 draw() { 
@@ -904,7 +905,8 @@
                 }
                 requestAnimationFrame(animateFireworks);
             }
-            setInterval(() => { rockets.push(new Rocket()); }, 3000); // Seltener
+            // HÖHERE FREQUENZ
+            setInterval(() => { rockets.push(new Rocket()); }, 1200); 
             animateFireworks();
 
 

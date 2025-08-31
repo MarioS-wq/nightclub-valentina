@@ -1,4 +1,4 @@
---- START OF FILE index (67).html ---
+ --- START OF FILE index (67).html ---
 
 <!DOCTYPE html>
 <html lang="de">
@@ -183,33 +183,6 @@
             object-fit: contain;
             object-position: bottom center;
         }
-        
-        /* --- Scroll Down Indicator im Bild-Container --- */
-        .scroll-down-link {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 4;
-            width: 28px;
-            height: 48px;
-            border: 2px solid rgba(255, 215, 0, 0.7);
-            border-radius: 24px;
-            display: flex;
-            justify-content: center;
-            padding-top: 8px;
-            opacity: 0;
-            animation: fadeIn 2s 1.5s ease-out forwards;
-        }
-        .scroll-down-link::before {
-            content: '';
-            width: 4px;
-            height: 8px;
-            background-color: rgba(255, 215, 0, 0.7);
-            border-radius: 2px;
-            animation: scroll-anim 2.5s infinite ease-in-out;
-        }
-
 
         /* =================================================================== */
         /*  5. CONTENT SECTIONS & CONTAINERS (UNVERÄNDERT)                   */
@@ -417,7 +390,7 @@
         
         
         /* =================================================================== */
-        /*  8. GALLERY & LIGHTBOX SECTION (UNVERÄNDERT)                      */
+        /*  8. GALLERY & LIGHTBOX SECTION                                    */
         /* =================================================================== */
         .gallery-grid {
             display: grid;
@@ -429,6 +402,8 @@
         .gallery-item {
             aspect-ratio: 1 / 1;
             background-color: #222;
+            background-size: cover;
+            background-position: center;
             border: 2px solid rgba(255, 215, 0, 0.3);
             border-radius: 8px;
             position: relative;
@@ -437,7 +412,7 @@
             cursor: pointer;
         }
         .gallery-item::before {
-            content: 'Impression';
+            content: '';
             position: absolute;
             top: 50%;
             left: 50%;
@@ -500,14 +475,23 @@
             position: relative;
             max-width: 90vw;
             max-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .lightbox-image {
-            width: 100%;
-            height: 100%;
+        .lightbox-image, .lightbox-video {
+            width: auto;
+            height: auto;
+            max-width: 100%;
             max-height: 90vh;
             object-fit: contain;
             border: 2px solid var(--gold);
+            display: none; /* Hide both by default */
         }
+        .lightbox-image.active, .lightbox-video.active {
+            display: block; /* Show only the active one */
+        }
+
         .lightbox-close, .lightbox-nav {
             position: absolute;
             background: none;
@@ -672,26 +656,70 @@
         
         <!-- BLOCK 1: KRONE & TITEL -->
         <div class="hero-top-content">
-            <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756459292/Ultrarealistic_3d_rendering_202508291116_ljdkbk.gif" alt="Animierte goldene Krone" class="crown-gif">
+            <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756634819/Design_ohne_Titel_2_nutcpy.gif" alt="Animierte goldene Krone" class="crown-gif">
             <div class="hero-title-group">
-                <h1>Nightclub Valentina</h1>
+                <h1>Nightclub Valentina (Neu)</h1>
                 <p>Welcome to Nightclub entertainment</p>
             </div>
         </div>
         
         <!-- BLOCK 2: BILD (GIRL) -->
         <div class="hero-image-container">
-            <!-- NEUES BILD EINGEFÜGT -->
             <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756551252/Design_ohne_Titel_39_tt3y1y.png" alt="Eine elegante Frau in einem Nachtclub" class="woman-asset">
-            <a href="#info" class="scroll-down-link" aria-label="Scroll down"></a>
         </div>
 
     </header>
 
     <!-- =================================================================== -->
-    <!--  MAIN CONTENT WRAPPER (UNVERÄNDERT)                                 -->
+    <!--  MAIN CONTENT WRAPPER                                               -->
     <!-- =================================================================== -->
     <main>
+        
+        <!-- Gallery Section -->
+        <section class="content-section light">
+            <div class="section-container">
+                <h2 class="section-title animate-on-scroll">Impressionen</h2>
+                <p class="section-subtitle animate-on-scroll">Ein flüchtiger Blick in unsere Welt der Verführung.</p>
+                <div class="gallery-grid animate-on-scroll">
+                    <!-- Item 1: Video -->
+                    <div class="gallery-item" 
+                         style="--stagger-index: 1;"
+                         data-type="video"
+                         data-src="https://res.cloudinary.com/dbhmigaes/video/upload/v1756632560/WhatsApp_Video_2025-08-30_at_15.06.28_ivq0ai.mp4">
+                        <div class="gallery-item-overlay">
+                             <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                    <!-- Item 2: Image -->
+                    <div class="gallery-item" 
+                         style="--stagger-index: 2; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756632559/WhatsApp_Image_2025-08-30_at_15.09.41_r9nooj.jpg');"
+                         data-type="image"
+                         data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756632559/WhatsApp_Image_2025-08-30_at_15.09.41_r9nooj.jpg">
+                        <div class="gallery-item-overlay">
+                            <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                        </div>
+                    </div>
+                    <!-- Item 3: Image -->
+                    <div class="gallery-item" 
+                         style="--stagger-index: 3; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756632559/WhatsApp_Image_2025-08-30_at_15.05.03_vccguu.jpg');"
+                         data-type="image"
+                         data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756632559/WhatsApp_Image_2025-08-30_at_15.05.03_vccguu.jpg">
+                        <div class="gallery-item-overlay">
+                             <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                        </div>
+                    </div>
+                    <!-- Item 4: Image -->
+                    <div class="gallery-item" 
+                         style="--stagger-index: 4; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756632559/WhatsApp_Image_2025-08-30_at_15.07.15_ttxtem.jpg');"
+                         data-type="image"
+                         data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756632559/WhatsApp_Image_2025-08-30_at_15.07.15_ttxtem.jpg">
+                        <div class="gallery-item-overlay">
+                             <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Slogan & Info Section -->
         <section class="content-section light" id="info">
@@ -736,51 +764,11 @@
                 </div>
             </div>
         </section>
-        
-        <!-- Gallery Section -->
-        <section class="content-section light">
-            <div class="section-container">
-                <h2 class="section-title animate-on-scroll">Impressionen</h2>
-                <p class="section-subtitle animate-on-scroll">Ein flüchtiger Blick in unsere Welt der Verführung.</p>
-                <div class="gallery-grid animate-on-scroll">
-                    <div class="gallery-item" style="--stagger-index: 1;">
-                        <div class="gallery-item-overlay">
-                             <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        </div>
-                    </div>
-                    <div class="gallery-item" style="--stagger-index: 2;">
-                        <div class="gallery-item-overlay">
-                            <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        </div>
-                    </div>
-                    <div class="gallery-item" style="--stagger-index: 3;">
-                        <div class="gallery-item-overlay">
-                             <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        </div>
-                    </div>
-                    <div class="gallery-item" style="--stagger-index: 4;">
-                        <div class="gallery-item-overlay">
-                             <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        </div>
-                    </div>
-                    <div class="gallery-item" style="--stagger-index: 5;">
-                        <div class="gallery-item-overlay">
-                            <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        </div>
-                    </div>
-                    <div class="gallery-item" style="--stagger-index: 6;">
-                        <div class="gallery-item-overlay">
-                             <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
     </main>
 
     <!-- =================================================================== -->
-    <!--  FOOTER (UNVERÄNDERT)                                               -->
+    <!--  FOOTER                                                             -->
     <!-- =================================================================== -->
     <footer class="site-footer">
         <div class="footer-content">
@@ -794,12 +782,13 @@
     </footer>
 
     <!-- =================================================================== -->
-    <!--  UI ELEMENTS (LIGHTBOX, BACK TO TOP) (UNVERÄNDERT)                  -->
+    <!--  UI ELEMENTS (LIGHTBOX, BACK TO TOP)                                -->
     <!-- =================================================================== -->
     <!-- Lightbox Structure -->
     <div class="lightbox" id="lightbox">
         <div class="lightbox-content">
             <img src="" class="lightbox-image" alt="Galerieansicht">
+            <video src="" class="lightbox-video" controls></video>
             <button class="lightbox-close" id="lightbox-close" aria-label="Schließen">&times;</button>
             <button class="lightbox-nav prev" id="lightbox-prev" aria-label="Vorheriges Bild">&#10094;</button>
             <button class="lightbox-nav next" id="lightbox-next" aria-label="Nächstes Bild">&#10095;</button>
@@ -811,7 +800,6 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
     </button>
     
-
     <!-- =================================================================== -->
     <!--  JAVASCRIPT                                                         -->
     <!-- =================================================================== -->
@@ -835,9 +823,7 @@
 
             class Particle {
                 constructor(x, y, hue) { 
-                    this.x = x; 
-                    this.y = y; 
-                    this.hue = hue; 
+                    this.x = x; this.y = y; this.hue = hue; 
                     this.size = Math.random() * 1.5 + 1;
                     this.lifespan = 100;
                     this.opacity = 0.7;
@@ -847,30 +833,23 @@
                     this.vy = Math.sin(angle) * speed;
                 }
                 update() { 
-                    this.vx *= FRICTION; 
-                    this.vy *= FRICTION; 
-                    this.vy += GRAVITY; 
-                    this.x += this.vx; 
-                    this.y += this.vy; 
+                    this.vx *= FRICTION; this.vy *= FRICTION; this.vy += GRAVITY; 
+                    this.x += this.vx; this.y += this.vy; 
                     this.lifespan--;
                     if (this.lifespan < 50) this.opacity = (this.lifespan / 50) * 0.7; 
                 }
                 draw() { 
                     ctx.globalAlpha = this.opacity; 
                     ctx.fillStyle = `hsl(${this.hue}, 100%, 70%)`; 
-                    ctx.beginPath(); 
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); 
-                    ctx.fill(); 
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
                     ctx.globalAlpha = 1; 
                 }
             }
 
             class Rocket {
                 constructor() { 
-                    this.x = Math.random() * canvas.width; 
-                    this.y = canvas.height; 
+                    this.x = Math.random() * canvas.width; this.y = canvas.height; 
                     this.size = 2; 
-                    // Nur Gelb (ca. 40-60) und Rot (ca. 0-20) Töne
                     this.hue = Math.random() < 0.7 ? Math.random() * 20 + 40 : Math.random() * 20;
                     this.targetY = Math.random() * (canvas.height / 2);
                     this.vy = -(Math.random() * 3 + 4); 
@@ -880,37 +859,24 @@
                     if (this.y < this.targetY) { this.explode(); this.lifespan = 0; } 
                 }
                 explode() { 
-                    // MEHR PARTIKEL
                     const pCount = Math.floor(Math.random() * 60) + 60; 
                     for(let i = 0; i < pCount; i++) particles.push(new Particle(this.x, this.y, this.hue)); 
                 }
                 draw() { 
                     ctx.fillStyle = `hsl(${this.hue}, 100%, 70%)`; 
-                    ctx.beginPath(); 
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); 
-                    ctx.fill(); 
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
                 }
             }
             
             function animateFireworks() {
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.18)'; 
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-                for (let i = rockets.length - 1; i >= 0; i--) { 
-                    rockets[i].update(); 
-                    rockets[i].draw(); 
-                    if (rockets[i].lifespan === 0) rockets.splice(i, 1); 
-                }
-                for (let i = particles.length - 1; i >= 0; i--) { 
-                    particles[i].update(); 
-                    particles[i].draw(); 
-                    if (particles[i].lifespan <= 0 || particles[i].opacity <= 0) particles.splice(i, 1); 
-                }
+                for (let i = rockets.length - 1; i >= 0; i--) { rockets[i].update(); rockets[i].draw(); if (rockets[i].lifespan === 0) rockets.splice(i, 1); }
+                for (let i = particles.length - 1; i >= 0; i--) { particles[i].update(); particles[i].draw(); if (particles[i].lifespan <= 0 || particles[i].opacity <= 0) particles.splice(i, 1); }
                 requestAnimationFrame(animateFireworks);
             }
-            // HÖHERE FREQUENZ
             setInterval(() => { rockets.push(new Rocket()); }, 1200); 
             animateFireworks();
-
 
             // --- 2. ON-SCROLL FADE-IN ANIMATION ---
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
@@ -929,67 +895,74 @@
             // --- 3. BACK TO TOP BUTTON ---
             const backToTopButton = document.getElementById('back-to-top');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    backToTopButton.classList.add('visible');
-                } else {
-                    backToTopButton.classList.remove('visible');
-                }
+                if (window.scrollY > 300) { backToTopButton.classList.add('visible'); } 
+                else { backToTopButton.classList.remove('visible'); }
             });
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+            backToTopButton.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
 
-            // --- 4. GALLERY LIGHTBOX ---
+            // --- 4. GALLERY LIGHTBOX (UPDATED FOR VIDEO) ---
             const galleryItems = document.querySelectorAll('.gallery-item');
             const lightbox = document.getElementById('lightbox');
             const lightboxImage = lightbox.querySelector('.lightbox-image');
+            const lightboxVideo = lightbox.querySelector('.lightbox-video');
             const lightboxClose = document.getElementById('lightbox-close');
             const lightboxPrev = document.getElementById('lightbox-prev');
             const lightboxNext = document.getElementById('lightbox-next');
             
-            // Placeholder images (in a real scenario, these would come from the HTML or an API)
-            const images = [
-                'https://via.placeholder.com/800x800.png/111/FFD700?text=Bar+Impression',
-                'https://via.placeholder.com/800x800.png/111/FFD700?text=Lounge+Area',
-                'https://via.placeholder.com/800x800.png/111/FFD700?text=Show+Stage',
-                'https://via.placeholder.com/800x800.png/111/FFD700?text=VIP+Corner',
-                'https://via.placeholder.com/800x800.png/111/FFD700?text=Entrance',
-                'https://via.placeholder.com/800x800.png/111/FFD700?text=Exterieur'
-            ];
+            // Create an array of media items from the HTML data attributes
+            const mediaItems = Array.from(galleryItems).map(item => ({
+                type: item.dataset.type,
+                src: item.dataset.src
+            }));
             
             let currentIndex = 0;
 
-            const showImage = (index) => {
-                lightboxImage.src = images[index];
+            const showMedia = (index) => {
+                const item = mediaItems[index];
                 currentIndex = index;
+
+                // Hide both elements first
+                lightboxImage.classList.remove('active');
+                lightboxVideo.classList.remove('active');
+                lightboxVideo.pause(); // Stop video if it was playing
+
+                if (item.type === 'image') {
+                    lightboxImage.src = item.src;
+                    lightboxImage.classList.add('active');
+                } else if (item.type === 'video') {
+                    lightboxVideo.src = item.src;
+                    lightboxVideo.classList.add('active');
+                    lightboxVideo.play();
+                }
             };
 
             galleryItems.forEach((item, index) => {
                 item.addEventListener('click', () => {
                     lightbox.classList.add('active');
-                    showImage(index);
+                    showMedia(index);
                 });
             });
 
-            const closeLightbox = () => lightbox.classList.remove('active');
+            const closeLightbox = () => {
+                lightbox.classList.remove('active');
+                lightboxVideo.pause();
+                lightboxVideo.src = ""; // Stop video from loading in background
+            };
 
             lightboxClose.addEventListener('click', closeLightbox);
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) closeLightbox();
-            });
+            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
             lightboxPrev.addEventListener('click', () => {
-                const newIndex = (currentIndex - 1 + images.length) % images.length;
-                showImage(newIndex);
+                const newIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
+                showMedia(newIndex);
             });
             
             lightboxNext.addEventListener('click', () => {
-                const newIndex = (currentIndex + 1) % images.length;
-                showImage(newIndex);
+                const newIndex = (currentIndex + 1) % mediaItems.length;
+                showMedia(newIndex);
             });
             
-            // Keyboard navigation for lightbox
             document.addEventListener('keydown', (e) => {
                 if (lightbox.classList.contains('active')) {
                     if (e.key === 'Escape') closeLightbox();

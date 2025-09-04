@@ -411,7 +411,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            /* margin-top has been moved to the category title */
         }
 
         .gallery-item {
@@ -426,27 +425,28 @@
             transition: transform var(--transition-fast), box-shadow var(--transition-fast);
             cursor: pointer;
         }
-        .gallery-item::before {
-            content: '';
+
+        .gallery-item-video-preview {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #555;
-            font-family: var(--font-heading);
-            font-style: italic;
-            font-size: 1.5rem;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
         }
+
         .gallery-item-overlay {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             transition: opacity var(--transition-fast);
+            z-index: 2;
         }
         .gallery-item-overlay-icon {
             width: 60px;
@@ -454,6 +454,25 @@
             color: var(--gold);
             transform: scale(0.8);
             transition: transform var(--transition-fast);
+        }
+
+        /* Persistent Play Icon for Video */
+        .gallery-item.is-video::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)"><path d="M8 5v14l11-7z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
         }
 
         .gallery-item:hover {
@@ -680,7 +699,7 @@
         
         <!-- BLOCK 2: BILD (GIRL) -->
         <div class="hero-image-container">
-            <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756551252/Design_ohne_Titel_39_tt3y1y.png" alt="Eine elegante Frau in einem Nachtclub" class="woman-asset">
+            <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756984336/Design_ohne_Titel_40_kmzj1z.png" alt="Eine elegante Frau in einem Nachtclub" class="woman-asset">
         </div>
 
     </header>
@@ -711,9 +730,9 @@
                 <h3 class="gallery-category-title animate-on-scroll">Indoor:</h3>
                 <div class="gallery-grid animate-on-scroll">
                     <div class="gallery-item" 
-                         style="--stagger-index: 1; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756725343/Bildschirmfoto_2025-09-01_um_13.15.40_cgbs5y.png');"
+                         style="--stagger-index: 1; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756725364/WhatsApp_Image_2025-08-25_at_17.50.43_ovx4a8.jpg');"
                          data-type="image"
-                         data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756725343/Bildschirmfoto_2025-09-01_um_13.15.40_cgbs5y.png">
+                         data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756725364/WhatsApp_Image_2025-08-25_at_17.50.43_ovx4a8.jpg">
                         <div class="gallery-item-overlay">
                             <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
                         </div>
@@ -727,17 +746,9 @@
                         </div>
                     </div>
                     <div class="gallery-item" 
-                         style="--stagger-index: 3; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756725359/WhatsApp_Image_2025-08-25_at_17.50.42_zrohok.jpg');"
+                         style="--stagger-index: 3; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756725343/Bildschirmfoto_2025-09-01_um_13.15.40_cgbs5y.png');"
                          data-type="image"
-                         data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756725359/WhatsApp_Image_2025-08-25_at_17.50.42_zrohok.jpg">
-                        <div class="gallery-item-overlay">
-                            <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        </div>
-                    </div>
-                    <div class="gallery-item" 
-                         style="--stagger-index: 4; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756725364/WhatsApp_Image_2025-08-25_at_17.50.43_ovx4a8.jpg');"
-                         data-type="image"
-                         data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756725364/WhatsApp_Image_2025-08-25_at_17.50.43_ovx4a8.jpg">
+                         data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756725343/Bildschirmfoto_2025-09-01_um_13.15.40_cgbs5y.png">
                         <div class="gallery-item-overlay">
                             <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
                         </div>
@@ -746,10 +757,10 @@
 
                 <h3 class="gallery-category-title animate-on-scroll">Mädels:</h3>
                 <div class="gallery-grid animate-on-scroll">
-                    <div class="gallery-item" 
-                         style="--stagger-index: 1; background-image: url('https://res.cloudinary.com/dbhmigaes/video/upload/v1756632560/WhatsApp_Video_2025-08-30_at_15.06.28_ivq0ai.jpg');"
+                    <div class="gallery-item is-video" style="--stagger-index: 1;"
                          data-type="video"
                          data-src="https://res.cloudinary.com/dbhmigaes/video/upload/v1756632560/WhatsApp_Video_2025-08-30_at_15.06.28_ivq0ai.mp4">
+                        <video class="gallery-item-video-preview" src="https://res.cloudinary.com/dbhmigaes/video/upload/v1756632560/WhatsApp_Video_2025-08-30_at_15.06.28_ivq0ai.mp4" autoplay loop muted playsinline></video>
                         <div class="gallery-item-overlay">
                              <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                         </div>
@@ -771,7 +782,15 @@
                         </div>
                     </div>
                     <div class="gallery-item" 
-                         style="--stagger-index: 4; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756753218/WhatsApp_Image_2025-09-01_at_14.03.39_cxlcpa.jpg');"
+                         style="--stagger-index: 4; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756632559/WhatsApp_Image_2025-08-30_at_15.07.15_ttxtem.jpg');"
+                         data-type="image"
+                         data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756632559/WhatsApp_Image_2025-08-30_at_15.07.15_ttxtem.jpg">
+                        <div class="gallery-item-overlay">
+                            <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                        </div>
+                    </div>
+                    <div class="gallery-item" 
+                         style="--stagger-index: 5; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756753218/WhatsApp_Image_2025-09-01_at_14.03.39_cxlcpa.jpg');"
                          data-type="image"
                          data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756753218/WhatsApp_Image_2025-09-01_at_14.03.39_cxlcpa.jpg">
                         <div class="gallery-item-overlay">
@@ -779,9 +798,9 @@
                         </div>
                     </div>
                     <div class="gallery-item" 
-                         style="--stagger-index: 5; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756632559/WhatsApp_Image_2025-08-30_at_15.07.15_ttxtem.jpg');"
+                         style="--stagger-index: 6; background-image: url('https://res.cloudinary.com/dbhmigaes/image/upload/v1756753218/WhatsApp_Image_2025-09-01_at_14.04.33_hg9d68.jpg');"
                          data-type="image"
-                         data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756632559/WhatsApp_Image_2025-08-30_at_15.07.15_ttxtem.jpg">
+                         data-src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756753218/WhatsApp_Image_2025-09-01_at_14.04.33_hg9d68.jpg">
                         <div class="gallery-item-overlay">
                             <svg class="gallery-item-overlay-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
                         </div>

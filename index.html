@@ -392,6 +392,15 @@
         /* =================================================================== */
         /*  8. GALLERY & LIGHTBOX SECTION                                    */
         /* =================================================================== */
+  
+        /* Stellt sicher, dass die Bilder der Mädels perfekt sitzen */
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    /* Füllt den Rahmen ohne Verzerrung */
+    object-position: top; /* Priorisiert den Kopfbereich/oberen Teil des Bildes */
+}
+        
         .gallery-category-title {
             font-size: clamp(1.8rem, 4vw, 2.2rem);
             font-family: var(--font-heading);

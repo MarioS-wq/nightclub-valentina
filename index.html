@@ -1,26 +1,18 @@
---- START OF FILE index (67).html ---
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <!-- =================================================================== -->
-    <!--  METADATA & BROWSER CONFIGURATION                                   -->
-    <!-- =================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nightclub Valentina - Exquisite Entertainment</title>
     <meta name="description" content="Erleben Sie eine Nacht voller Eleganz und Verführung im Nightclub Valentina. Exklusive Unterhaltung, Show & Party Girls und unsere spezielle After Midnight Bar.">
     
-    <!-- =================================================================== -->
-    <!--  FONTS & ICONS                                                      -->
-    <!-- =================================================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 
     <style>
         /* =================================================================== */
-        /*  1. VARIABLES & GLOBAL RESETS                                     */
+        /* 1. VARIABLES & GLOBAL RESETS                                     */
         /* =================================================================== */
         :root {
             /* --- Primary Colors --- */
@@ -99,7 +91,7 @@
 
 
         /* =================================================================== */
-        /*  2. FIREWORKS CANVAS & ANIMATION                                  */
+        /* 2. FIREWORKS CANVAS & ANIMATION                                  */
         /* =================================================================== */
         #fireworks-canvas {
             position: fixed;
@@ -113,7 +105,7 @@
 
 
         /* =================================================================== */
-        /*  3. KEYVISUAL / HERO SECTION                                */
+        /* 3. KEYVISUAL / HERO SECTION                                */
         /* =================================================================== */
         .keyvisual-hero {
             display: flex;
@@ -185,7 +177,7 @@
         }
 
         /* =================================================================== */
-        /*  5. CONTENT SECTIONS & CONTAINERS (UNVERÄNDERT)                   */
+        /* 5. CONTENT SECTIONS & CONTAINERS                                  */
         /* =================================================================== */
         .content-section {
             padding: 120px 40px;
@@ -253,7 +245,7 @@
         
         
         /* =================================================================== */
-        /*  6. INFO SECTION STYLING (UNVERÄNDERT)                            */
+        /* 6. INFO SECTION STYLING                                           */
         /* =================================================================== */
         .info-container {
             max-width: 850px;
@@ -301,7 +293,7 @@
         
 
         /* =================================================================== */
-        /*  7. 3-COLUMN GRID SECTION (UNVERÄNDERT)                           */
+        /* 7. 3-COLUMN GRID SECTION                                         */
         /* =================================================================== */
         .grid-container {
             display: grid;
@@ -390,16 +382,16 @@
         
         
         /* =================================================================== */
-        /*  8. GALLERY & LIGHTBOX SECTION                                    */
+        /* 8. GALLERY & LIGHTBOX SECTION                                    */
         /* =================================================================== */
   
         /* Stellt sicher, dass die Bilder der Mädels perfekt sitzen */
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;    /* Füllt den Rahmen ohne Verzerrung */
-    object-position: top; /* Priorisiert den Kopfbereich/oberen Teil des Bildes */
-}
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;    /* Füllt den Rahmen ohne Verzerrung */
+            object-position: top; /* Priorisiert den Kopfbereich/oberen Teil des Bildes */
+        }
         
         .gallery-category-title {
             font-size: clamp(1.8rem, 4vw, 2.2rem);
@@ -423,10 +415,10 @@
         }
 
         .gallery-item {
-     aspect-ratio: 4 / 5; /* Oder 2 / 3 für noch mehr Höhe */
+            aspect-ratio: 4 / 5; /* Oder 2 / 3 für noch mehr Höhe */
             background-color: #222;
             background-size: cover;
-           background-position: center top;
+            background-position: center top;
             border: 2px solid rgba(255, 105, 180, 0.3);
             border-radius: 8px;
             position: relative;
@@ -555,7 +547,7 @@
         
 
         /* =================================================================== */
-        /*  9. FOOTER SECTION (UNVERÄNDERT)                                  */
+        /* 9. FOOTER SECTION                                                */
         /* =================================================================== */
         .site-footer {
             background-color: #030303;
@@ -582,7 +574,7 @@
         
 
         /* =================================================================== */
-        /*  10. UTILITY & UI ELEMENTS (UNVERÄNDERT)                          */
+        /* 10. UTILITY & UI ELEMENTS                                        */
         /* =================================================================== */
         /* --- Back to Top Button --- */
         #back-to-top {
@@ -636,7 +628,7 @@
 
 
         /* =================================================================== */
-        /*  11. KEYFRAME ANIMATIONS (UNVERÄNDERT)                            */
+        /* 11. KEYFRAME ANIMATIONS                                          */
         /* =================================================================== */
         @keyframes fadeIn { 
             from { opacity: 0; } 
@@ -656,7 +648,7 @@
 
 
         /* =================================================================== */
-        /*  12. RESPONSIVE MEDIA QUERIES                                     */
+        /* 12. RESPONSIVE MEDIA QUERIES                                     */
         /* =================================================================== */
         @media (max-width: 1024px) {
             .content-section { padding: 100px 30px; }
@@ -687,17 +679,10 @@
 </head>
 <body>
 
-    <!-- =================================================================== -->
-    <!--  UI & BACKGROUND ELEMENTS                                           -->
-    <!-- =================================================================== -->
     <canvas id="fireworks-canvas"></canvas>
 
-    <!-- =================================================================== -->
-    <!--  HERO SECTION / KEYVISUAL                                           -->
-    <!-- =================================================================== -->
     <header class="keyvisual-hero">
         
-        <!-- BLOCK 1: KRONE & TITEL -->
         <div class="hero-top-content">
             <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756937072/Ultrarealistic_3d_rendering_202509040004_af5qqi.gif" alt="Animierte goldene Krone" class="crown-gif">
             <div class="hero-title-group">
@@ -706,20 +691,15 @@
             </div>
         </div>
         
-        <!-- BLOCK 2: BILD (GIRL) -->
         <div class="hero-image-container">
             <img src="https://res.cloudinary.com/dbhmigaes/image/upload/v1756984336/Design_ohne_Titel_40_kmzj1z.png" alt="Eine elegante Frau in einem Nachtclub" class="woman-asset">
         </div>
 
     </header>
 
-    <!-- =================================================================== -->
-    <!--  MAIN CONTENT WRAPPER                                               -->
-    <!-- =================================================================== -->
- <main>
+    <main>
         
-
-     <section class="content-section light">
+        <section class="content-section light">
             <div class="section-container">
                 <h2 class="section-title animate-on-scroll">Impressionen</h2>
                 <p class="section-subtitle animate-on-scroll">Ein flüchtiger Blick in unsere Welt der Verführung.</p>
@@ -764,12 +744,6 @@
                     </div>
                 </div>
 
-             <main>
-        <section class="content-section light">
-            <div class="section-container">
-                <h2 class="section-title animate-on-scroll">Impressionen</h2>
-                
-
                 <h3 class="gallery-category-title animate-on-scroll">Mädels:</h3>
                 <div class="gallery-grid animate-on-scroll">
                     
@@ -800,7 +774,6 @@
             </div>
         </section>
 
-        <!-- Slogan & Info Section -->
         <section class="content-section light" id="info">
             <div class="info-container animate-on-scroll">
                 <div class="ornate-divider"><span class="ornate-divider-icon"></span></div>
@@ -815,25 +788,40 @@
             </div>
         </section>
 
-        <!-- 3-Column Grid Section -->
+        <section class="content-section light">
+            <div class="section-container">
+                <div class="info-container animate-on-scroll" style="border-color: var(--gold); background: radial-gradient(circle, rgba(255, 105, 180, 0.1) 0%, rgba(0,0,0,0) 80%);">
+                    <svg class="grid-item-icon" style="width: 80px; height: 80px; margin-bottom: 20px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                    </svg>
+                    <h2>Exklusiver Shuttle Service</h2>
+                    <p class="slogan">Komfortabel & Diskret ankommen</p>
+                    <div class="details-text">
+                        <p>Wir holen Sie gerne ab und bringen Sie sicher zu uns.</p>
+                        <p>Unser privater Shuttle steht Ihnen nach Vereinbarung zur Verfügung.</p>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <a href="tel:+4369019533945" class="btn">Shuttle anfordern</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="content-section dark">
             <div class="section-container">
                 <div class="grid-container animate-on-scroll">
-                    <!-- Grid Item 1: Girls Gesucht -->
                     <div class="grid-item" style="--stagger-index: 1;">
                         <svg class="grid-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-4.43-.82-6.14-2.88a9.947 9.947 0 0 1 12.28 0C16.43 19.18 14.03 20 12 20z"/></svg>
                         <h3>Girls Gesucht</h3>
                         <p>Wir sind immer auf der Suche nach neuen, aufgeschlossenen Mädels, die unser exklusives Team bereichern wollen.</p>
                         <a href="https://wa.link/md8dbu" class="btn" target="_blank" rel="noopener noreferrer">Jetzt bewerben</a>
                     </div>
-                    <!-- Grid Item 2: Gäste-Info -->
                     <div class="grid-item" style="--stagger-index: 2;">
                         <svg class="grid-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.02.74-.25 1.02l-2.2 2.2z"/></svg>
                         <h3>Gäste-Info</h3>
                         <p>Wir haben für Sie geöffnet. Für unseren diskreten Escort-Service kontaktieren Sie uns bitte unter dieser Nummer.</p>
                         <a href="tel:+4369019533945" class="btn btn-phone">+43 690 19533945</a>
                     </div>
-                    <!-- Grid Item 3: Anfahrt -->
                     <div class="grid-item" style="--stagger-index: 3;">
                          <svg class="grid-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         <h3>Anfahrt & Parken</h3>
@@ -846,12 +834,9 @@
 
     </main>
 
-    <!-- =================================================================== -->
-    <!--  FOOTER                                                             -->
-    <!-- =================================================================== -->
     <footer class="site-footer">
         <div class="footer-content">
-            <p>&copy; 2025 Nightclub Valentina. Alle Rechte vorbehalten. Diskrete Unterhaltung auf höchstem Niveau.</p>
+            <p>© 2025 Nightclub Valentina. Alle Rechte vorbehalten. Diskrete Unterhaltung auf höchstem Niveau.</p>
             <div class="footer-links">
                 <a href="#">Impressum</a>
                 <a href="#">Datenschutz</a>
@@ -860,28 +845,20 @@
         </div>
     </footer>
 
-    <!-- =================================================================== -->
-    <!--  UI ELEMENTS (LIGHTBOX, BACK TO TOP)                                -->
-    <!-- =================================================================== -->
-    <!-- Lightbox Structure -->
     <div class="lightbox" id="lightbox">
         <div class="lightbox-content">
             <img src="" class="lightbox-image" alt="Galerieansicht">
             <video src="" class="lightbox-video" controls loop></video>
-            <button class="lightbox-close" id="lightbox-close" aria-label="Schließen">&times;</button>
-            <button class="lightbox-nav prev" id="lightbox-prev" aria-label="Vorheriges Bild">&#10094;</button>
-            <button class="lightbox-nav next" id="lightbox-next" aria-label="Nächstes Bild">&#10095;</button>
+            <button class="lightbox-close" id="lightbox-close" aria-label="Schließen">×</button>
+            <button class="lightbox-nav prev" id="lightbox-prev" aria-label="Vorheriges Bild">❮</button>
+            <button class="lightbox-nav next" id="lightbox-next" aria-label="Nächstes Bild">❯</button>
         </div>
     </div>
 
-    <!-- Back to Top Button -->
     <button id="back-to-top" aria-label="Nach oben scrollen">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
     </button>
     
-    <!-- =================================================================== -->
-    <!--  JAVASCRIPT                                                         -->
-    <!-- =================================================================== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
@@ -999,6 +976,7 @@
 
             const showMedia = (index) => {
                 const item = mediaItems[index];
+                if(!item) return;
                 currentIndex = index;
 
                 // Hide both elements first
